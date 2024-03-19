@@ -1,58 +1,62 @@
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-
-import { useColorScheme } from '@/components/useColorScheme';
-
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from 'expo-router';
-
-export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)',
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import React from "react";
+import { Stack } from "expo-router";
+const _layout = () => {
+  return (
+    <Stack screenOptions={{ animation: "ios", headerShown: false }}>
+      <Stack.Screen
+        name="Screens/Home"
+        options={{
+          title: "Home",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Screens/LocalPlay"
+        options={{
+          title: "Local Play",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Screens/Room"
+        options={{
+          title: "Room",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Screens/Multiplayer"
+        options={{
+          title: "Multiplayer",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Screens/CreateRoom"
+        options={{
+          title: "Room",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Screens/JoinRoom"
+        options={{
+          title: "Room",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Screens/GameBoard"
+        options={{
+          title: "Room",
+          headerShown: false,
+        }}
+      />
+    </Stack>
+  );
 };
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
+export default _layout;
 
-export default function RootLayout() {
-  const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-    ...FontAwesome.font,
-  });
-
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
-  useEffect(() => {
-    if (error) throw error;
-  }, [error]);
-
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
-  if (!loaded) {
-    return null;
-  }
-
-  return <RootLayoutNav />;
-}
-
-function RootLayoutNav() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
-    </ThemeProvider>
-  );
-}
+const styles = StyleSheet.create({});
